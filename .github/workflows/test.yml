@@ -10,7 +10,6 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: write
 
-
 defaults:
   run:
     shell: bash
@@ -36,10 +35,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
 
-          #      - name: Build with Gradle
-          #        run: ./gradlew -b ci.gradle package
+      - name: Build
+        run: ./gradlew build
 
-      - name: Build and Test
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test
         run: ./gradlew test
