@@ -44,25 +44,25 @@ run {
 
 publishing {
 
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/lucienclin/mii_broad_consent_mapper"
-      credentials {
-        username = System.getenv("GITHUB_ACTOR")
-        password = System.getenv("GITHUB_TOKEN")
-      }
+    repositories {
+        maven {
+          name = "GitHubPackages"
+          url = "https://maven.pkg.github.com/lucienclin/mii_broad_consent_mapper"
+          credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+          }
+        }
     }
-  }
-
-  publications {
-     maven(MavenPublication) {
-       groupId = 'de.ukt.mvh'
-       artifactId = 'mii-broad-consent-mapper'
-       version = file('version.txt').text.trim()
-
-       from components.java
-     }
-  }
+ 
+    publications {
+        maven(MavenPublication) {
+          groupId = 'de.ukt.mvh'
+          artifactId = 'mii-broad-consent-mapper'
+//          version = file('version.txt').text.trim()
+      
+          from components.java
+        }
+    }
 }
 
