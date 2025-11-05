@@ -4,8 +4,8 @@ import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileReader;
+import java.io.InputStreamReader;
+//import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,7 +65,8 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
         var jsonParser = forR4Cached().newJsonParser();
 
         ClassLoader classLoader = getClass().getClassLoader();
-        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent_parents.json").getPath()));
+        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent_parents.json")));
+//        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent_parents.json").getPath()));
 
         System.out.println(jsonParser.encodeResourceToString(targetConsent));
         System.out.println(jsonParser.encodeResourceToString(consent));

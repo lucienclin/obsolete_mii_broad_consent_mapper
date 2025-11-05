@@ -11,8 +11,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.io.FileReader;
+//import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,7 +40,8 @@ public class TestConsentMapper_1_7_2 {
         var jsonParser = forR4Cached().newJsonParser();
 
         ClassLoader classLoader = getClass().getClassLoader();
-        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
+        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
+//        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
 
