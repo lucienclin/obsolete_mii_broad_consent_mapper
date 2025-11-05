@@ -29,7 +29,6 @@ public class TestConsentMapper_1_7_2 {
         birthday = dateFormat.parse("2020-05-13T00:00:00+02");
     }
 
-/*
     @Test
     public void testConsentMapper() throws Exception {
         ConsentMapper_1_7_2 mapper = new ConsentMapper_1_7_2();
@@ -44,7 +43,6 @@ public class TestConsentMapper_1_7_2 {
         var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
-*/
 
     @Test
     public void testConsentMapperParents() throws Exception {

@@ -7,13 +7,12 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-  #permissions:
-  #  contents: write
+permissions:
+  contents: read
 
 defaults:
   run:
     shell: bash
-
 
 jobs:
   release:
@@ -35,8 +34,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
 
-          #      - name: Build
-          #        run: ./gradlew build
-
       - name: Test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew test
