@@ -40,8 +40,19 @@ public class TestConsentMapper_1_7_2 {
         var jsonParser = forR4Cached().newJsonParser();
 
         ClassLoader classLoader = getClass().getClassLoader();
-        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
 
+        Resource targetConsent = null;
+
+	try (var reader = new InputStreamReader(classLoader.getResourceAsStream("consent.json"))){
+
+          targetConsent = (Resource) jsonParser.parseResource(reader);
+
+	} catch (Exception e){
+
+	  System.out.println(e.getMessage());	
+	  e.printStackTrace();
+
+	}
 //        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
