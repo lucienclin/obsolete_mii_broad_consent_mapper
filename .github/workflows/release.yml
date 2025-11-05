@@ -39,7 +39,7 @@ jobs:
 
       - name: Setup Gradle
         #        if: steps.release.outputs.releases_created == 'true'
-        uses: sbt/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Publish jar to GitHub Packages
         #        if: steps.release.outputs.releases_created == 'true'
