@@ -28,24 +28,24 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout
-        #        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release.outputs.releases_created == 'true'
         uses: actions/checkout@v4
 
       - name: Setup JDK
-        #        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release.outputs.releases_created == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
       - name: Setup Gradle
-        #        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release.outputs.releases_created == 'true'
         uses: gradle/actions/setup-gradle@v5
 
       - name: Publish jar to GitHub Packages
-        #        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release.outputs.releases_created == 'true'
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            #          VERSION: ${{ steps.release.outputs['major'] }}.${{ steps.release.outputs['minor'] }}.${{ steps.release.outputs['patch'] }}    
-            #        run: ./gradlew -Pversion=${{VERSION}} publish
-        run: ./gradlew publish
+          VERSION: ${{ steps.release.outputs['major'] }}.${{ steps.release.outputs['minor'] }}.${{ steps.release.outputs['patch'] }}    
+          run: ./gradlew -Pversion=${{VERSION}} publish
+            #        run: ./gradlew publish
