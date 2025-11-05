@@ -7,6 +7,17 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  packages: write
+  contents: write
+  pull-requests: write
+  issues: write
+
+defaults:
+  run:
+    shell: bash
+
+
 jobs:
   release:
     name: Test
@@ -31,4 +42,4 @@ jobs:
           #        run: ./gradlew -b ci.gradle package
 
       - name: Build and Test
-        run: .gradlew test
+        run: ./gradlew test
