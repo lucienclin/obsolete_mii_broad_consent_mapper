@@ -7,8 +7,8 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: read
+permissions: read-all
+  #  contents: read
 
 defaults:
   run:
@@ -37,4 +37,4 @@ jobs:
       - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ls -l src/test/resources && ./gradlew test
+        run: ./gradlew test
