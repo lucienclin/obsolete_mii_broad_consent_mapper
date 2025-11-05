@@ -24,9 +24,9 @@ public class TestConsentMapper_1_7_2 {
     private static Date birthday;
     @BeforeAll
     public static void init() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-        consentDate = dateFormat.parse("2025-06-27T00:00:00+02");
-        birthday = dateFormat.parse("2020-05-13T00:00:00+02");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        consentDate = dateFormat.parse("2025-06-27T00:00:00");
+        birthday = dateFormat.parse("2020-05-13T00:00:00");
     }
 
     @Test
@@ -41,18 +41,7 @@ public class TestConsentMapper_1_7_2 {
 
         ClassLoader classLoader = getClass().getClassLoader();
 
-        Resource targetConsent = null;
-
-	try (var reader = new InputStreamReader(classLoader.getResourceAsStream("consent.json"))){
-
-          targetConsent = (Resource) jsonParser.parseResource(reader);
-
-	} catch (Exception e){
-
-	  System.out.println(e.getMessage());	
-	  e.printStackTrace();
-
-	}
+        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
 //        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }

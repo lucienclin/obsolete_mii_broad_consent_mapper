@@ -73,8 +73,8 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
     @Test
     public void testWithdrawal() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-        Date birthday = dateFormat.parse("2020-05-13T00:00:00+02");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date birthday = dateFormat.parse("2020-05-13T00:00:00");
         String redCapExport = """
 [
   {
