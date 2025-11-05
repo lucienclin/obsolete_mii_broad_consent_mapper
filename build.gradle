@@ -42,8 +42,6 @@ run {
 }
 
 
-version = file('version.txt').text.trim()
-
 publishing {
 
   repositories {
@@ -55,6 +53,16 @@ publishing {
         password = System.getenv("GITHUB_TOKEN")
       }
     }
+  }
+
+  publications {
+     maven(MavenPublication) {
+       groupId = 'de.ukt.mvh'
+       artifactId = 'mii-broad-consent-mapper'
+       version = file('version.txt').text.trim()
+
+       from components.java
+     }
   }
 }
 
