@@ -14,7 +14,7 @@ import static ca.uhn.fhir.context.FhirContext.forR4Cached;
 import static org.junit.Assert.assertThrows;
 
 public class TestConsentMapperParents_1_7_2_from_REDCap {
-/*
+
     @Test
     public void testConsentMapper() throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
@@ -70,7 +70,7 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
-*/
+
     @Test
     public void testWithdrawal() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");

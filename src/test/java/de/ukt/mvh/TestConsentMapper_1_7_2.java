@@ -28,7 +28,7 @@ public class TestConsentMapper_1_7_2 {
         consentDate = dateFormat.parse("2025-06-27T00:00:00+02");
         birthday = dateFormat.parse("2020-05-13T00:00:00+02");
     }
-/*
+
     @Test
     public void testConsentMapper() throws Exception {
         ConsentMapper_1_7_2 mapper = new ConsentMapper_1_7_2();
@@ -41,10 +41,11 @@ public class TestConsentMapper_1_7_2 {
 
         ClassLoader classLoader = getClass().getClassLoader();
         var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
+
 //        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
-*/
+
     @Test
     public void testConsentMapperParents() throws Exception {
         ConsentMapperParents_1_7_2 mapper = new ConsentMapperParents_1_7_2();
