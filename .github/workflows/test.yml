@@ -8,10 +8,8 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
-  packages: write
   contents: write
-  pull-requests: write
-  issues: write
+
 
 defaults:
   run:
@@ -42,4 +40,6 @@ jobs:
           #        run: ./gradlew -b ci.gradle package
 
       - name: Build and Test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew test
