@@ -47,5 +47,5 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.release.outputs['major'] }}.${{ steps.release.outputs['minor'] }}.${{ steps.release.outputs['patch'] }}    
-          run: ./gradlew -Pversion=${{VERSION}} publish
-            #        run: ./gradlew publish
+        run: ./gradlew -Pversion=${{ VERSION }} publish
+        #  run: ./gradlew publish
