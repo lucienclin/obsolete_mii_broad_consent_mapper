@@ -49,7 +49,7 @@ public class TestConsentMapper_1_7_2 {
 	  )
 	);
 
-        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
+        Assertions.assertTrue(consent.equalsDeep(targetConsent));
     }
 
 
