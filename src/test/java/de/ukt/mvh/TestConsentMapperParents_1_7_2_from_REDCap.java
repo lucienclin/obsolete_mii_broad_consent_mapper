@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 import static ca.uhn.fhir.context.FhirContext.forR4Cached;
 import static org.apache.commons.lang3.time.DateUtils.addYears;
 import static org.junit.Assert.assertThrows;
@@ -23,7 +22,6 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
     @BeforeAll
     public static void init() throws Exception {
-       //TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
 
        var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
 
