@@ -1,26 +1,39 @@
 package de.ukt.mvh;
 
 import org.hl7.fhir.r4.model.Consent;
-import org.hl7.fhir.r4.model.Resource;
+import ca.uhn.fhir.parser.IParser;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.InputStreamReader;
-//import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import static ca.uhn.fhir.context.FhirContext.forR4Cached;
+import static org.apache.commons.lang3.time.DateUtils.addYears;
 import static org.junit.Assert.assertThrows;
 
 public class TestConsentMapperParents_1_7_2_from_REDCap {
 
+    private static Consent targetConsent;	
+    private static Date consentDate;
+    private static Date birthday;
+    private static IParser jsonParser = forR4Cached().newJsonParser();
+
+    @BeforeAll
+    public static void init() throws Exception {
+
+       var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
+
+       targetConsent = jsonParser.parseResource(Consent.class,new InputStreamReader(classLoader.getResourceAsStream("consent_parents.json")));
+
+       consentDate = targetConsent.getDateTime();
+       birthday = addYears(targetConsent.getProvision().getPeriod().getEnd(), -18);
+    }
+
     @Test
     public void testConsentMapper() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-        Date birthday = dateFormat.parse("2020-05-13T00:00:00+02:00");
-	TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
         String redCapExport = """
 [
   {
@@ -64,11 +77,6 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 ]
 """;
         Consent consent = ConsentMapperParents_1_7_2_from_REDCap.makeConsent(redCapExport,birthday);
-        var jsonParser = forR4Cached().newJsonParser();
-
-        ClassLoader classLoader = getClass().getClassLoader();
-        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent_parents.json")));
-//        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent_parents.json").getPath()));
 
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
