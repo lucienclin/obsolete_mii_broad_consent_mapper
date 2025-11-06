@@ -78,8 +78,8 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 """;
         Consent consent = ConsentMapperParents_1_7_2_from_REDCap.makeConsent(redCapExport,birthday);
 
-//        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
-        Assertions.assertTrue(consent.equalsDeep(targetConsent));
+        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
+//        Assertions.assertTrue(consent.equalsDeep(targetConsent));
     }
 
     @Test
