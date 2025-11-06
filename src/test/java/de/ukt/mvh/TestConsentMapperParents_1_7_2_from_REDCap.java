@@ -23,7 +23,7 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
     @BeforeAll
     public static void init() throws Exception {
-       TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
+       //TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
 
        var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
 
