@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import static org.apache.commons.lang3.time.DateUtils.addYears;
 import static ca.uhn.fhir.context.FhirContext.forR4Cached;
 
@@ -28,6 +29,7 @@ public class TestConsentMapper_1_7_2 {
 
     @BeforeAll
     public static void init() throws Exception {
+       TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
 
        var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
 
@@ -49,8 +51,8 @@ public class TestConsentMapper_1_7_2 {
 	  )
 	);
 
-//        Assertions.assertTrue(consent.equalsDeep(targetConsent));
-        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
+        Assertions.assertTrue(consent.equalsDeep(targetConsent));
+//        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
 
 

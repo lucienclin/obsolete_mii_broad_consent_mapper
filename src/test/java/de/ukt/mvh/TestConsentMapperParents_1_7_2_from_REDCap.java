@@ -23,6 +23,7 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
     @BeforeAll
     public static void init() throws Exception {
+       TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
 
        var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
 
@@ -78,8 +79,8 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 """;
         Consent consent = ConsentMapperParents_1_7_2_from_REDCap.makeConsent(redCapExport,birthday);
 
-        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
-//        Assertions.assertTrue(consent.equalsDeep(targetConsent));
+//        Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
+        Assertions.assertTrue(consent.equalsDeep(targetConsent));
     }
 
     @Test
