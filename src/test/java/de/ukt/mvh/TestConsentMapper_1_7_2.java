@@ -4,6 +4,7 @@ import de.ukt.mvh.util.ConsentMapperParents_1_7_2;
 import de.ukt.mvh.util.ConsentMapper_12_to_17_1_7_2;
 import de.ukt.mvh.util.ConsentMapper_1_7_2;
 import de.ukt.mvh.util.ConsentMapper_7_to_11_1_7_2;
+import ca.uhn.fhir.parser.IParser;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Resource;
 import org.junit.jupiter.api.Assertions;
@@ -15,20 +16,29 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
-
+//import java.util.TimeZone;
+import static org.apache.commons.lang3.time.DateUtils.addYears;
 import static ca.uhn.fhir.context.FhirContext.forR4Cached;
 
 
 public class TestConsentMapper_1_7_2 {
+    private static Consent targetConsent;	
     private static Date consentDate;
     private static Date birthday;
+    private static IParser jsonParser = forR4Cached().newJsonParser();
     @BeforeAll
     public static void init() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-        consentDate = dateFormat.parse("2025-06-27T00:00:00+02:00");
-        birthday = dateFormat.parse("2020-05-13T00:00:00+02:00");
-	TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+//        consentDate = dateFormat.parse("2025-06-27T00:00:00+02:00");
+//        birthday = dateFormat.parse("2020-05-13T00:00:00+02:00");
+//	TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
+
+       var classLoader = TestConsentMapper_1_7_2.class.getClassLoader();
+
+       targetConsent = jsonParser.parseResource(Consent.class,new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
+
+       consentDate = targetConsent.getDateTime();
+       birthday = addYears(targetConsent.getProvision().getPeriod().getEnd(), -18);
     }
 
 
@@ -40,11 +50,9 @@ public class TestConsentMapper_1_7_2 {
                 consentDate,
                 birthday,
                 true, true, true,true,true,true,true,true,true, null, null));
-        var jsonParser = forR4Cached().newJsonParser();
 
-        ClassLoader classLoader = getClass().getClassLoader();
 
-        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
+//        var targetConsent = (Resource) jsonParser.parseResource(new InputStreamReader(classLoader.getResourceAsStream("consent.json")));
 //        var targetConsent = (Resource) jsonParser.parseResource(new FileReader(classLoader.getResource("consent.json").getPath()));
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
