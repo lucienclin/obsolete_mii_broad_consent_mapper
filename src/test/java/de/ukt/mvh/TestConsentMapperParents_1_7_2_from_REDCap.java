@@ -9,16 +9,18 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static ca.uhn.fhir.context.FhirContext.forR4Cached;
 import static org.junit.Assert.assertThrows;
 
 public class TestConsentMapperParents_1_7_2_from_REDCap {
-/*
+
     @Test
     public void testConsentMapper() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthday = dateFormat.parse("2020-05-13");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+        Date birthday = dateFormat.parse("2020-05-13T00:00:00+02:00");
+	TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
         String redCapExport = """
 [
   {
@@ -70,11 +72,11 @@ public class TestConsentMapperParents_1_7_2_from_REDCap {
 
         Assertions.assertEquals(jsonParser.encodeResourceToString(targetConsent), jsonParser.encodeResourceToString(consent));
     }
-*/
+
     @Test
     public void testWithdrawal() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        Date birthday = dateFormat.parse("2020-05-13T00:00:00");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+        Date birthday = dateFormat.parse("2020-05-13T00:00:00+02:00");
         String redCapExport = """
 [
   {
